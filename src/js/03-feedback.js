@@ -10,23 +10,15 @@ const refs = {
 
 refs.feedbackFormEl.addEventListener('input', throttle(onInput, 500));
 
-const formArray = {};
+let formArray = {};
 
 const LOCALSTORAGESTRINGNAME = "feedback-form-state";
 
 function onInput(evt) {
-    // if (evt.target.name === 'email') {
-    //     formArray.email = evt.target.value
-    //     console.log(formArray.email)
-    // }
-    // if (evt.target.name === 'message') {
-    //     formArray.message = evt.target.value
-    //     console.log(formArray.message)
-    // }
+  
+      formArray[evt.target.name] = evt.target.value
 
-    formArray[evt.target.name] = evt.target.value
-
-    console.log(formArray)
+    // console.log(formArray)
 
     localStorage.setItem(LOCALSTORAGESTRINGNAME, JSON.stringify(formArray))
 }
@@ -54,5 +46,6 @@ function onSubmit(evt) {
     console.log(formArray)
     refs.feedbackFormEl.reset()
     localStorage.removeItem(LOCALSTORAGESTRINGNAME)
+    formArray = {}
 }
 
